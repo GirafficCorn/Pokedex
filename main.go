@@ -6,33 +6,18 @@ import (
 	"os"
 )
 
-type cliCommand struct {
-	name        string
-	description string
-	callback    func() error
-}
-
 func main() {
-
-	commands := map[string]cliCommand{}
-	commands["exit"] = cliCommand{
-		name:        "exit",
-		description: "Exit the Pokedex",
-		callback:    exit,
-	}
-	commands["help"] = cliCommand{
-		name:        "help",
-		description: "Displays a help message",
-		callback:    helpCallback(commands),
-	}
-
 	scanner := bufio.NewScanner(os.Stdin)
 
 	for {
 		fmt.Printf("Pokedex > ")
 		scanner.Scan()
 		text := cleanInput(scanner.Text())
+		if len(text) == 0 {
+			continue
+		}
 
+		commands := getCommands()
 		command, ok := commands[text[0]]
 		if ok {
 			err := command.callback()
