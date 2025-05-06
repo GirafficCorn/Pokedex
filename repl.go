@@ -4,6 +4,11 @@ import (
 	"strings"
 )
 
+type config struct {
+	Next     string
+	Previous string
+}
+
 func cleanInput(text string) []string {
 	cleaned := strings.ToLower(text)
 	words := strings.Fields(cleaned)
@@ -13,7 +18,7 @@ func cleanInput(text string) []string {
 type cliCommand struct {
 	name        string
 	description string
-	callback    func() error
+	callback    func(*config) error
 }
 
 func getCommands() map[string]cliCommand {
@@ -27,6 +32,16 @@ func getCommands() map[string]cliCommand {
 			name:        "exit",
 			description: "Exit the Pokedex",
 			callback:    exit,
+		},
+		"map": {
+			name:        "map",
+			description: "List next 20 locations",
+			callback:    mapCommand,
+		},
+		"mapb": {
+			name:        "mapb",
+			description: "List previous 20 locations",
+			callback:    mapbCommand,
 		},
 	}
 }
