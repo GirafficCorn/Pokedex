@@ -2,11 +2,14 @@ package main
 
 import (
 	"strings"
+
+	"github.com/GirafficCorn/Pokedex/internal/pokecache"
 )
 
 type config struct {
 	Next     string
 	Previous string
+	Cache    *pokecache.Cache
 }
 
 func cleanInput(text string) []string {

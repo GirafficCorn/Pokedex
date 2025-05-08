@@ -14,7 +14,7 @@ func mapCommand(c *config) error {
 		url = "https://pokeapi.co/api/v2/location-area/"
 	}
 
-	loc, err := pokeapi.GetLocationAreas(url)
+	loc, err := pokeapi.GetLocationAreas(url, c.Cache)
 	if err != nil {
 		return err
 	}
@@ -37,7 +37,7 @@ func mapbCommand(c *config) error {
 		fmt.Println("you're on the first page")
 	}
 
-	loc, err := pokeapi.GetLocationAreas(url)
+	loc, err := pokeapi.GetLocationAreas(url, c.Cache)
 	if err != nil {
 		return err
 	}
