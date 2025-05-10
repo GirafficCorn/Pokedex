@@ -3,6 +3,7 @@ package main
 import (
 	"strings"
 
+	"github.com/GirafficCorn/Pokedex/internal/pokeapi"
 	"github.com/GirafficCorn/Pokedex/internal/pokecache"
 )
 
@@ -10,6 +11,7 @@ type config struct {
 	Next     string
 	Previous string
 	Cache    *pokecache.Cache
+	Pokedex  map[string]pokeapi.Pokemon
 }
 
 func cleanInput(text string) []string {
@@ -50,6 +52,11 @@ func getCommands() map[string]cliCommand {
 			name:        "explore",
 			description: "Lists all Pokemon in a location",
 			callback:    explore,
+		},
+		"catch": {
+			name:        "catch",
+			description: "Catch a Pokemon",
+			callback:    catchPokemon,
 		},
 	}
 }
