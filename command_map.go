@@ -6,7 +6,7 @@ import (
 	"github.com/GirafficCorn/Pokedex/internal/pokeapi"
 )
 
-func mapCommand(c *config) error {
+func mapCommand(c *config, n string) error {
 	var url string
 	if c.Next != "" {
 		url = c.Next
@@ -28,7 +28,7 @@ func mapCommand(c *config) error {
 	return nil
 }
 
-func mapbCommand(c *config) error {
+func mapbCommand(c *config, n string) error {
 	var url string
 	if c.Previous != "" {
 		url = c.Previous

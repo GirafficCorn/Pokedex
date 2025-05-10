@@ -24,10 +24,8 @@ func GetLocationAreas(url string, cache *pokecache.Cache) (Location, error) {
 		if res.StatusCode > 299 {
 			return Location{}, fmt.Errorf("response failed with status code %d", res.StatusCode)
 		}
-		fmt.Println("Fetched")
 		cache.Add(url, body)
 	} else {
-		fmt.Println("Cached")
 		body = r
 	}
 	var loc Location

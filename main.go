@@ -12,7 +12,7 @@ import (
 func main() {
 	scanner := bufio.NewScanner(os.Stdin)
 	cfg := &config{
-		Cache: pokecache.NewCache(10 * time.Second),
+		Cache: pokecache.NewCache(60 * time.Second),
 	}
 
 	for {
@@ -22,12 +22,18 @@ func main() {
 		if len(text) == 0 {
 			continue
 		}
+		var param string
+		if len(text) > 1 {
+			param = text[1]
+		} else {
+			param = ""
+		}
 
 		commands := getCommands()
 		command, ok := commands[text[0]]
+
 		if ok {
-			//Need to init pointer to config
-			err := command.callback(cfg)
+			err := command.callback(cfg, param)
 			if err != nil {
 				fmt.Println(err)
 			}
